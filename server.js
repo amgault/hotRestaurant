@@ -5,20 +5,7 @@ var path = require('path');
 
 var PORT = 4000;
 
-var reservation = [
-    {
-        name: ''
-    },
-    {
-        phone: ''
-    },
-    {
-        email: ''
-    },
-    {
-        uid: ''
-        }
-];
+var reservation = [];
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -35,6 +22,10 @@ app.get('/tables', function(req, res){
 
 app.get('/reservation',function(req, res){
     res.sendFile(path.join(__dirname, "reservation.html"))
+} );
+
+app.get('/api/tables',function(req, res){
+    res.json(reservation);
 } );
 
 app.post('/reservation', function (req, res) {

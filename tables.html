@@ -47,6 +47,24 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+
+
+      $.get("/api/tables", function(data) {
+        console.log(JSON.stringify(data));
+        if (data) {
+            var div = $('div');
+            // div.addClass('well');
+            // div.append('<h2>' + data.uid + '</h2>');
+        }
+        else {
+          $("#name").text("The force is not strong with this one. Your character was not found.");
+          $("#stats").hide();
+        }
+      });
+
+  </script>
+
     
 </body>
 </html>

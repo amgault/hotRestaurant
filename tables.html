@@ -53,9 +53,18 @@
       $.get("/api/tables", function(data) {
         console.log(JSON.stringify(data));
         if (data) {
-            var div = $('div');
-            // div.addClass('well');
-            // div.append('<h2>' + data.uid + '</h2>');
+            data.forEach( function(r, i) {
+                var targetDiv = $('<div>');
+                targetDiv.addClass('well');
+                targetDiv.attr('id', i);
+                targetDiv.append('<h2><span class="label label-primary">' + (i+1) + '</span>' + ' | ' + r.uid + '</h2>');
+                if(i < 5) {
+                    $('#reservations').append(targetDiv);
+                } else {
+                    $('#waitlist').append(targetDiv);
+                }
+            })
+            
         }
         else {
           $("#name").text("The force is not strong with this one. Your character was not found.");

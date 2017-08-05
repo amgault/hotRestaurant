@@ -6,6 +6,7 @@ var path = require('path');
 var PORT = 4000;
 
 var reservation = [];
+var waitlist = [];
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,8 +25,22 @@ app.get('/reservation',function(req, res){
     res.sendFile(path.join(__dirname, "reservation.html"))
 } );
 
-app.get('/api/tables',function(req, res){
+app.get('/getReservations', function(req, res){
     res.json(reservation);
+});
+
+app.get('/api/tables',function(req, res){
+    var temp = reservation;
+    res.json(temp.slice(0, 5));
+} );
+
+app.get('/api/waitlist',function(req, res){
+    var temp = reservation;
+    if(temp.length > 5) {
+        res.json(temp.slice(5));
+    } else {
+        res.json([]);
+    }  
 } );
 
 app.post('/reservation', function (req, res) {

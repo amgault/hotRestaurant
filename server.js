@@ -5,6 +5,21 @@ var path = require('path');
 
 var PORT = 4000;
 
+var reservation = [
+    {
+        name: ''
+    },
+    {
+        phone: ''
+    },
+    {
+        email: ''
+    },
+    {
+        uid: ''
+        }
+];
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
@@ -22,14 +37,18 @@ app.get('/reservation',function(req, res){
     res.sendFile(path.join(__dirname, "reservation.html"))
 } );
 
-//define some routes
-app.post('/api/reservation', function(req,res){
-//    if (req.body);
+app.post('/reservation', function (req, res) {
     console.log(req.body);
-    
+    if (req.body.name) {
+        reservation.push(req.body);
+        console.log(reservation);
+        res.send("success");
+    }
+    else {
+        res.send(req.body);
+        console.log("You didn't enter any info");
+    };
 });
-
-
 
 app.listen(PORT, function(){
     console.log(`Listening on PORT ${PORT}`);
